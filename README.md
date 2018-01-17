@@ -31,7 +31,7 @@ There're many interesting ideas out there. Let's take a look together:
 - Closure compiler is a JavaScript to (better) JavaScript compiler.
 - Closure compiler uses JavaScript comment and annotation type inference.
 - Closure compiler supports generic, inheritance, polymorphism and more.
-- Making closure compiler better is not only benifit for Java user, but also
+- Making closure compiler better is not only benefit for Java user, but also
   JavaScript users. For examples, better integration for Polymer, Angular, React
   frameworks.
 - Depending on the browser types and version, GWT transpiles to different
@@ -40,3 +40,9 @@ There're many interesting ideas out there. Let's take a look together:
 - GWT supports different levels of type-check: normal (default), optimized,
   minimal, none. Depends on quality of the codebase, and the runtime execution
   requirements, you can choose different type-checks.
+
+## Terminology
+
+Abbreviation | Description
+:--- | :---
+DOM | Document Object Model
