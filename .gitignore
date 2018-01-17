@@ -81,3 +81,10 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+#--------------------
+# GWT
+#--------------------
+
+gwt-unitCache/
+*.rpc
