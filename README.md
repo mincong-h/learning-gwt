@@ -2,6 +2,17 @@
 
 Learning GWT
 
+## GWT Tutorial
+
+See <http://www.gwtproject.org/doc/latest/tutorial/index.html>
+
+Create a new application called _"StockWater"_:
+
+```
+$ ./webAppCreator -out StockWatcher \
+    com.google.gwt.sample.stockwatcher.StockWatcher
+```
+
 ## GWT Con 2016 Keynote
 
 See <https://www.youtube.com/watch?v=P4VhPck5s_g>
