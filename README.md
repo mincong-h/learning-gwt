@@ -4,13 +4,24 @@ Learning GWT
 
 ## GWT Tutorial
 
-See <http://www.gwtproject.org/doc/latest/tutorial/index.html>
+Build a sample GWT application by following the
+[GWT tutorial](http://www.gwtproject.org/doc/latest/tutorial/index.html) and
+[Maven GWT plugin](https://gwt-maven-plugin.github.io/gwt-maven-plugin/user-guide/archetype.html).
 
-Create a new application called _"StockWater"_:
+Firstly, create a new application called _"Quickstart"_ using the archetype of GWT Maven plugin.
+The group ID, artifact ID and other metadata will be asked in interactive mode:
 
 ```
-$ ./webAppCreator -out StockWatcher \
-    com.google.gwt.sample.stockwatcher.StockWatcher
+$ mvn archetype:generate \
+    -DarchetypeGroupId=org.codehaus.mojo \
+    -DarchetypeArtifactId=gwt-maven-plugin \
+    -DarchetypeVersion=2.8.1
+```
+
+Then run the GWT application in DevMode via Maven:
+
+```
+$ mvn gwt:run
 ```
 
 ## GWT Con 2016 Keynote
