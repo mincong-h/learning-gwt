@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -45,40 +44,7 @@ public class StockMarket implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    CellTable<Stock> prices = new CellTable<>();
-    TextColumn<Stock> idColumn = new TextColumn<Stock>() {
-      @Override
-      public String getValue(Stock stock) {
-        return String.valueOf(stock.getId());
-      }
-    };
-    TextColumn<Stock> companyColumn = new TextColumn<Stock>() {
-      @Override
-      public String getValue(Stock stock) {
-        return stock.getCompany();
-      }
-    };
-    TextColumn<Stock> priceColumn = new TextColumn<Stock>() {
-      @Override
-      public String getValue(Stock stock) {
-        return String.valueOf(stock.getPrice());
-      }
-    };
-
-    TextColumn<Stock> variationColumn = new TextColumn<Stock>() {
-      @Override
-      public String getValue(Stock stock) {
-        String s = String.valueOf(stock.getVariation() * 1.00);
-        int point = s.indexOf('.');
-        return s.substring(0, point + 2);
-      }
-    };
-
-    prices.addColumn(idColumn, "ID");
-    prices.addColumn(companyColumn, "Company");
-    prices.addColumn(priceColumn, "Price");
-    prices.addColumn(variationColumn, "Variation");
-
+    CellTable<Stock> prices = Stocks.newCellTable();
     ListDataProvider<Stock> dataProvider = new ListDataProvider<>();
     dataProvider.addDataDisplay(prices);
     dataProvider.setList(Stocks.newRows(10));
