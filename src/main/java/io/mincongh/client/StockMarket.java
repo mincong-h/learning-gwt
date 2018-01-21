@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import io.mincongh.shared.FieldVerifier;
+import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -39,18 +40,22 @@ public class StockMarket implements EntryPoint {
 
   private final Messages messages = GWT.create(Messages.class);
 
+  private final List<Stock> stocks = Stocks.newRows(10);
+
+  private final ListDataProvider<Stock> dataProvider = new ListDataProvider<>();
+
+  private final CellTable<Stock> prices = Stocks.newCellTable();
+
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    CellTable<Stock> prices = Stocks.newCellTable();
-    ListDataProvider<Stock> dataProvider = new ListDataProvider<>();
     dataProvider.addDataDisplay(prices);
-    dataProvider.setList(Stocks.newRows(10));
+    dataProvider.setList(stocks);
 
     final Button addButton = new Button(messages.addButton());
     final TextBox nameField = new TextBox();
-    nameField.getElement().setPropertyString("placeholder", "11, Google, 1.0, 2");
+    nameField.setText("11, Google, 1.0, 2");
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
@@ -147,6 +152,9 @@ public class StockMarket implements EntryPoint {
             serverResponseLabel.setHTML(result);
             dialogBox.center();
             closeButton.setFocus(true);
+            stocks.add(Stock.parse(result));
+            dataProvider.refresh();
+            prices.redraw();
           }
         });
       }

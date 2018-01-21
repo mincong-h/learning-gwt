@@ -19,8 +19,7 @@ public class StockServiceImpl extends RemoteServiceServlet implements StockServi
           "Name must be at least 4 characters long");
     }
     // Escape data from the client to avoid cross-site script vulnerabilities.
-    input = escapeHtml(input);
-    return "[ " + input + " ]";
+    return escapeHtml(input);
   }
 
   /**

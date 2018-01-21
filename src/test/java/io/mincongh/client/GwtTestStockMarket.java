@@ -53,7 +53,8 @@ public class GwtTestStockMarket extends GWTTestCase {
     delayTestFinish(10000);
 
     // Send a request to the server.
-    greetingService.addStock("GWT User", new AsyncCallback<String>() {
+    final String input = "GWT User";
+    greetingService.addStock(input, new AsyncCallback<String>() {
       public void onFailure(Throwable caught) {
         // The request resulted in an unexpected error.
         fail("Request failure: " + caught.getMessage());
@@ -61,7 +62,7 @@ public class GwtTestStockMarket extends GWTTestCase {
 
       public void onSuccess(String result) {
         // Verify that the response is correct.
-        assertTrue(result.startsWith("Hello, GWT User!"));
+        assertEquals(input, result);
 
         // Now that we have received a response, we need to tell the test runner
         // that the test is complete. You must call finishTest() after an
