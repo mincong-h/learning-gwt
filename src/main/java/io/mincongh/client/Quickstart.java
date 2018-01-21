@@ -83,12 +83,10 @@ public class Quickstart implements EntryPoint {
     dialogBox.setWidget(dialogVPanel);
 
     // Add a handler to close the DialogBox
-    closeButton.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        dialogBox.hide();
-        sendButton.setEnabled(true);
-        sendButton.setFocus(true);
-      }
+    closeButton.addClickHandler(event -> {
+      dialogBox.hide();
+      sendButton.setEnabled(true);
+      sendButton.setFocus(true);
     });
 
     // Create a handler for the sendButton and nameField
@@ -97,6 +95,7 @@ public class Quickstart implements EntryPoint {
       /**
        * Fired when the user clicks on the sendButton.
        */
+      @Override
       public void onClick(ClickEvent event) {
         sendNameToServer();
       }
@@ -104,6 +103,7 @@ public class Quickstart implements EntryPoint {
       /**
        * Fired when the user types in the nameField.
        */
+      @Override
       public void onKeyUp(KeyUpEvent event) {
         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
           sendNameToServer();
@@ -127,6 +127,7 @@ public class Quickstart implements EntryPoint {
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
         greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+          @Override
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
             dialogBox.setText("Remote Procedure Call - Failure");
@@ -136,6 +137,7 @@ public class Quickstart implements EntryPoint {
             closeButton.setFocus(true);
           }
 
+          @Override
           public void onSuccess(String result) {
             dialogBox.setText("Remote Procedure Call");
             serverResponseLabel.removeStyleName("serverResponseLabelError");
