@@ -21,7 +21,7 @@ import io.mincongh.shared.FieldVerifier;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Quickstart implements EntryPoint {
+public class StockMarket implements EntryPoint {
 
   /**
    * The message displayed to the user when the server cannot be reached or

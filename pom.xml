@@ -5,10 +5,11 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.mincongh</groupId>
-  <artifactId>greeting</artifactId>
+  <artifactId>stock-market</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Maven Archetype for GWT</name>
+  <name>Stock Market</name>
+  <description>An awesome stock market web application written in GWT.</description>
 
   <properties>
     <!-- Convenience property to set the GWT version -->
@@ -81,9 +82,9 @@
         <!-- Plugin configuration. There are many available options, see
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>Quickstart.html</runTarget>
+          <runTarget>StockMarket.html</runTarget>
           <modules>
-            <module>io.mincongh.Quickstart</module>
+            <module>io.mincongh.StockMarket</module>
           </modules>
         </configuration>
       </plugin>

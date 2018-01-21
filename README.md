@@ -7,8 +7,7 @@ Learning GWT
 Build a sample GWT application by following the
 [GWT tutorial](http://www.gwtproject.org/doc/latest/tutorial/index.html) and
 [Maven GWT plugin](https://gwt-maven-plugin.github.io/gwt-maven-plugin/user-guide/archetype.html).
-
-Firstly, create a new application called _"Quickstart"_ using the archetype of GWT Maven plugin.
+Firstly, create a new application using the archetype of GWT Maven plugin.
 The group ID, artifact ID and other metadata will be asked in interactive mode:
 
 ```

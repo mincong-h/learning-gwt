@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to="Quickstart">
+<module rename-to="StockMarket">
   <!-- Inherit our applications main module.                      -->
-  <inherits name='io.mincongh.Quickstart' />
+  <inherits name='io.mincongh.StockMarket' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Quickstart/greet" class="io.mincongh.server.GreetingServiceImpl" />
+  <servlet path="/StockMarket/greet" class="io.mincongh.server.GreetingServiceImpl" />
 
 </module>

@@ -13,12 +13,12 @@
 
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/Quickstart/greet</url-pattern>
+    <url-pattern>/StockMarket/greet</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Quickstart.html</welcome-file>
+    <welcome-file>StockMarket.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
