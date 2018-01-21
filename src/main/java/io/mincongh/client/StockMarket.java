@@ -10,12 +10,10 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import io.mincongh.shared.FieldVerifier;
 import java.util.List;
@@ -71,31 +69,11 @@ public class StockMarket implements EntryPoint {
     nameField.setFocus(true);
     nameField.selectAll();
 
-    // Create the popup dialog box
-    final DialogBox dialogBox = new DialogBox();
-    dialogBox.setText("Remote Procedure Call");
-    dialogBox.setAnimationEnabled(true);
-    final Button closeButton = new Button("Close");
     // We can set the id of a widget by accessing its Element
-    closeButton.getElement().setId("closeButton");
-    final Label textToServerLabel = new Label();
-    final HTML serverResponseLabel = new HTML();
-    VerticalPanel dialogVPanel = new VerticalPanel();
-    dialogVPanel.addStyleName("dialogVPanel");
-    dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-    dialogVPanel.add(textToServerLabel);
-    dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-    dialogVPanel.add(serverResponseLabel);
-    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-    dialogVPanel.add(closeButton);
-    dialogBox.setWidget(dialogVPanel);
-
-    // Add a handler to close the DialogBox
-    closeButton.addClickHandler(event -> {
-      dialogBox.hide();
-      addButton.setEnabled(true);
-      addButton.setFocus(true);
-    });
+    final Label requestLabel = new Label("None");
+    final Label responseLabel = new Label("None");
+    RootPanel.get("request").add(requestLabel);
+    RootPanel.get("response").add(responseLabel);
 
     // Create a handler for the addButton and nameField
     class MyHandler implements ClickHandler, KeyUpHandler {
@@ -131,27 +109,20 @@ public class StockMarket implements EntryPoint {
         }
 
         // Then, we send the input to the server.
-        addButton.setEnabled(false);
-        textToServerLabel.setText(textToServer);
-        serverResponseLabel.setText("");
+        requestLabel.setText(textToServer);
+        responseLabel.setText("");
         stockService.addStock(textToServer, new AsyncCallback<String>() {
           @Override
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
-            dialogBox.setText("Remote Procedure Call - Failure");
-            serverResponseLabel.addStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(SERVER_ERROR);
-            dialogBox.center();
-            closeButton.setFocus(true);
+            responseLabel.addStyleName("serverResponseLabelError");
+            responseLabel.setText(SERVER_ERROR);
           }
 
           @Override
           public void onSuccess(String result) {
-            dialogBox.setText("Remote Procedure Call");
-            serverResponseLabel.removeStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(result);
-            dialogBox.center();
-            closeButton.setFocus(true);
+            responseLabel.removeStyleName("serverResponseLabelError");
+            responseLabel.setText(result);
             stocks.add(Stock.parse(result));
             dataProvider.refresh();
             prices.redraw();
@@ -165,4 +136,5 @@ public class StockMarket implements EntryPoint {
     addButton.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
   }
+
 }
