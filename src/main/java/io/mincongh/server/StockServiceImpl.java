@@ -1,17 +1,16 @@
 package io.mincongh.server;
 
-import io.mincongh.client.GreetingService;
-import io.mincongh.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import io.mincongh.client.StockService;
+import io.mincongh.shared.FieldVerifier;
 
 /**
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-    GreetingService {
+public class StockServiceImpl extends RemoteServiceServlet implements StockService {
 
-  public String greetServer(String input) throws IllegalArgumentException {
+  public String addStock(String input) throws IllegalArgumentException {
     // Verify that the input is valid.
     if (!FieldVerifier.isValidName(input)) {
       // If the input is not valid, throw an IllegalArgumentException back to
@@ -19,16 +18,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
       throw new IllegalArgumentException(
           "Name must be at least 4 characters long");
     }
-
-    String serverInfo = getServletContext().getServerInfo();
-    String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
-    userAgent = escapeHtml(userAgent);
-
-    return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
+    return "[ " + input + " ]";
   }
 
   /**
@@ -45,4 +37,5 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
         ">", "&gt;");
   }
+
 }

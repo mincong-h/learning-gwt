@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -36,7 +35,7 @@ public class StockMarket implements EntryPoint {
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
-  private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+  private final StockServiceAsync stockService = GWT.create(StockService.class);
 
   private final Messages messages = GWT.create(Messages.class);
 
@@ -49,21 +48,18 @@ public class StockMarket implements EntryPoint {
     dataProvider.addDataDisplay(prices);
     dataProvider.setList(Stocks.newRows(10));
 
-    final Button sendButton = new Button(messages.sendButton());
+    final Button addButton = new Button(messages.addButton());
     final TextBox nameField = new TextBox();
-    final PasswordTextBox passwordField = new PasswordTextBox();
-    nameField.getElement().setPropertyString("placeholder", "Name^^");
-    passwordField.getElement().setPropertyString("placeholder", "Password");
+    nameField.getElement().setPropertyString("placeholder", "11, Google, 1.0, 2");
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
-    sendButton.addStyleName("sendButton");
+    addButton.addStyleName("sendButton");
 
     // Add widgets to the RootPanel
     RootPanel.get("stockContainer").add(prices);
     RootPanel.get("nameFieldContainer").add(nameField);
-    RootPanel.get("passwordFieldContainer").add(passwordField);
-    RootPanel.get("sendButtonContainer").add(sendButton);
+    RootPanel.get("sendButtonContainer").add(addButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
 
     // Focus the cursor on the name field when the app loads
@@ -92,15 +88,15 @@ public class StockMarket implements EntryPoint {
     // Add a handler to close the DialogBox
     closeButton.addClickHandler(event -> {
       dialogBox.hide();
-      sendButton.setEnabled(true);
-      sendButton.setFocus(true);
+      addButton.setEnabled(true);
+      addButton.setFocus(true);
     });
 
-    // Create a handler for the sendButton and nameField
+    // Create a handler for the addButton and nameField
     class MyHandler implements ClickHandler, KeyUpHandler {
 
       /**
-       * Fired when the user clicks on the sendButton.
+       * Fired when the user clicks on the addButton.
        */
       @Override
       public void onClick(ClickEvent event) {
@@ -130,10 +126,10 @@ public class StockMarket implements EntryPoint {
         }
 
         // Then, we send the input to the server.
-        sendButton.setEnabled(false);
+        addButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+        stockService.addStock(textToServer, new AsyncCallback<String>() {
           @Override
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
@@ -158,7 +154,7 @@ public class StockMarket implements EntryPoint {
 
     // Add a handler to send the name to the server
     MyHandler handler = new MyHandler();
-    sendButton.addClickHandler(handler);
+    addButton.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
   }
 }

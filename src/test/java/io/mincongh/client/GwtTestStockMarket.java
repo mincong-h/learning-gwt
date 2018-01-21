@@ -39,11 +39,11 @@ public class GwtTestStockMarket extends GWTTestCase {
 
   /**
    * This test will send a request to the server using the greetServer method in
-   * GreetingService and verify the response.
+   * StockService and verify the response.
    */
   public void testGreetingService() {
     // Create the service that we will test.
-    GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+    StockServiceAsync greetingService = GWT.create(StockService.class);
     ServiceDefTarget target = (ServiceDefTarget) greetingService;
     target.setServiceEntryPoint(GWT.getModuleBaseURL() + "StockMarket/greet");
 
@@ -53,7 +53,7 @@ public class GwtTestStockMarket extends GWTTestCase {
     delayTestFinish(10000);
 
     // Send a request to the server.
-    greetingService.greetServer("GWT User", new AsyncCallback<String>() {
+    greetingService.addStock("GWT User", new AsyncCallback<String>() {
       public void onFailure(Throwable caught) {
         // The request resulted in an unexpected error.
         fail("Request failure: " + caught.getMessage());

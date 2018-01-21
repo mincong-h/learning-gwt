@@ -4,6 +4,6 @@
   <inherits name='io.mincongh.StockMarket' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/StockMarket/greet" class="io.mincongh.server.GreetingServiceImpl" />
+  <servlet path="/StockMarket/greet" class="io.mincongh.server.StockServiceImpl" />
 
 </module>
