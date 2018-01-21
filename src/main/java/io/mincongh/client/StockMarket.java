@@ -7,6 +7,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -16,6 +18,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
 import io.mincongh.shared.FieldVerifier;
 
 /**
@@ -42,18 +45,56 @@ public class StockMarket implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
+    CellTable<Stock> prices = new CellTable<>();
+    TextColumn<Stock> idColumn = new TextColumn<Stock>() {
+      @Override
+      public String getValue(Stock stock) {
+        return String.valueOf(stock.getId());
+      }
+    };
+    TextColumn<Stock> companyColumn = new TextColumn<Stock>() {
+      @Override
+      public String getValue(Stock stock) {
+        return stock.getCompany();
+      }
+    };
+    TextColumn<Stock> priceColumn = new TextColumn<Stock>() {
+      @Override
+      public String getValue(Stock stock) {
+        return String.valueOf(stock.getPrice());
+      }
+    };
+
+    TextColumn<Stock> variationColumn = new TextColumn<Stock>() {
+      @Override
+      public String getValue(Stock stock) {
+        String s = String.valueOf(stock.getVariation() * 1.00);
+        int point = s.indexOf('.');
+        return s.substring(0, point + 2);
+      }
+    };
+
+    prices.addColumn(idColumn, "ID");
+    prices.addColumn(companyColumn, "Company");
+    prices.addColumn(priceColumn, "Price");
+    prices.addColumn(variationColumn, "Variation");
+
+    ListDataProvider<Stock> dataProvider = new ListDataProvider<>();
+    dataProvider.addDataDisplay(prices);
+    dataProvider.setList(Stocks.newRows(10));
+
     final Button sendButton = new Button(messages.sendButton());
     final TextBox nameField = new TextBox();
     final PasswordTextBox passwordField = new PasswordTextBox();
-    nameField.getElement().setPropertyString("placeholder", "Name");
+    nameField.getElement().setPropertyString("placeholder", "Name^^");
     passwordField.getElement().setPropertyString("placeholder", "Password");
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
     sendButton.addStyleName("sendButton");
 
-    // Add the nameField and sendButton to the RootPanel
-    // Use RootPanel.get() to get the entire body element
+    // Add widgets to the RootPanel
+    RootPanel.get("stockContainer").add(prices);
     RootPanel.get("nameFieldContainer").add(nameField);
     RootPanel.get("passwordFieldContainer").add(passwordField);
     RootPanel.get("sendButtonContainer").add(sendButton);
