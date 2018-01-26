@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import io.mincongh.shared.FieldVerifier;
 import java.util.List;
@@ -96,6 +95,16 @@ public class StockMarket implements EntryPoint {
         }
       }
 
+      private void updateDate() {
+        RootPanel.get("lastUpdate").clear();
+        RootPanel.get("lastUpdate").add(new Label(getDateStr()));
+      }
+
+      private native String getDateStr() /*-{
+        var date = new Date();
+        return date.toLocaleString("en-US");
+      }-*/;
+
       /**
        * Send the name from the nameField to the server and wait for a response.
        */
@@ -126,6 +135,7 @@ public class StockMarket implements EntryPoint {
             stocks.add(Stock.parse(result));
             dataProvider.refresh();
             prices.redraw();
+            updateDate();
           }
         });
       }
