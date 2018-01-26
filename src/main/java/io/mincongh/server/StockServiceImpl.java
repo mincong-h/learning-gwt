@@ -10,6 +10,9 @@ import io.mincongh.shared.FieldVerifier;
 @SuppressWarnings("serial")
 public class StockServiceImpl extends RemoteServiceServlet implements StockService {
 
+  /**
+   * Add stock into stock table.
+   */
   public String addStock(String input) throws IllegalArgumentException {
     // Verify that the input is valid.
     if (!FieldVerifier.isValidName(input)) {

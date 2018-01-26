@@ -13,11 +13,11 @@ public class Stock {
 
   private double variation;
 
-  public Stock(int i) {
-    this.id = i;
-    this.company = "Company " + i;
-    this.price = 1.0 * i;
-    this.variation = 0.1 * i;
+  public Stock(int id) {
+    this.id = id;
+    this.company = "Company " + id;
+    this.price = 1.0 * id;
+    this.variation = 0.1 * id;
   }
 
   private Stock(int id, String company, double price, double variation) {
@@ -43,8 +43,8 @@ public class Stock {
     return variation;
   }
 
-  public static Stock parse(String s) {
-    String[] tokens = s.split(",");
+  public static Stock parse(String input) {
+    String[] tokens = input.split(",");
     if (tokens.length != 4) {
       String msg = "Incorrect entry, expected 4 fields: id, company, price, variation";
       throw new IllegalArgumentException(msg);
@@ -58,12 +58,12 @@ public class Stock {
 
   @Override
   public String toString() {
-    return "Stock{" +
-        "id='" + id + '\'' +
-        ", company='" + company + '\'' +
-        ", price=" + price +
-        ", variation=" + variation +
-        '}';
+    return "Stock{"
+        + "id='" + id + '\''
+        + ", company='" + company + '\''
+        + ", price=" + price
+        + ", variation=" + variation
+        + '}';
   }
 
 }

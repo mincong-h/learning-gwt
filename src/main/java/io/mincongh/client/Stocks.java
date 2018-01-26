@@ -2,6 +2,7 @@ package io.mincongh.client;
 
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
