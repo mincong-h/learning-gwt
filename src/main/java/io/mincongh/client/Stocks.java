@@ -19,9 +19,7 @@ final class Stocks {
   static List<Stock> newRows(int count) {
     return IntStream.rangeClosed(1, count)
         .boxed()
-        // Cannot be simplified to method reference
-        // https://gwt-review.googlesource.com/c/gwt/+/14572
-        .map(i -> new Stock(i))
+        .map(Stock::new)
         .collect(Collectors.toList());
   }
 
