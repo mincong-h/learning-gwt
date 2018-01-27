@@ -9,22 +9,19 @@ public class Stock {
 
   private final String company;
 
-  private double price;
+  private final double price;
 
-  private double variation;
+  private final double delta;
 
   public Stock(int id) {
-    this.id = id;
-    this.company = "Company " + id;
-    this.price = 1.0 * id;
-    this.variation = 0.1 * id;
+    this(id, "Company " + id, Math.random() * 100, -10 + Math.random() * 20);
   }
 
-  private Stock(int id, String company, double price, double variation) {
+  private Stock(int id, String company, double price, double delta) {
     this.id = id;
     this.company = company;
     this.price = price;
-    this.variation = variation;
+    this.delta = delta;
   }
 
   public int getId() {
@@ -39,8 +36,12 @@ public class Stock {
     return price;
   }
 
-  public double getVariation() {
-    return variation;
+  public double getChange() {
+    return delta / price;
+  }
+
+  public double getDelta() {
+    return delta;
   }
 
   public static Stock parse(String input) {
@@ -52,8 +53,8 @@ public class Stock {
     int id = Integer.parseInt(tokens[0]);
     String company = tokens[1];
     double price = Double.parseDouble(tokens[2]);
-    double variation = Double.parseDouble(tokens[3]);
-    return new Stock(id, company, price, variation);
+    double delta = Double.parseDouble(tokens[3]);
+    return new Stock(id, company, price, delta);
   }
 
   @Override
@@ -62,7 +63,7 @@ public class Stock {
         + "id='" + id + '\''
         + ", company='" + company + '\''
         + ", price=" + price
-        + ", variation=" + variation
+        + ", delta=" + delta
         + '}';
   }
 

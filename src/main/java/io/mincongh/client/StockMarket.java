@@ -160,7 +160,7 @@ public class StockMarket implements EntryPoint {
     stockTable.addColumn(Stocks.newIdColumn(), "ID");
     stockTable.addColumn(Stocks.newCompanyColumn(), "Company");
     stockTable.addColumn(Stocks.newPriceColumn(), "Price");
-    stockTable.addColumn(Stocks.newVariationColumn(), "Variation");
+    stockTable.addColumn(Stocks.newChangeColumn(), "Change");
     stockTable.addColumn(deleteColumn, "Remove");
 
     dataProvider.addDataDisplay(stockTable);
