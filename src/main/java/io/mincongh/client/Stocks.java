@@ -1,8 +1,6 @@
 package io.mincongh.client;
 
-import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,7 +25,7 @@ final class Stocks {
         .collect(Collectors.toList());
   }
 
-  private static TextColumn<Stock> newIdColumn() {
+  static TextColumn<Stock> newIdColumn() {
     return new TextColumn<Stock>() {
       @Override
       public String getValue(Stock stock) {
@@ -36,7 +34,7 @@ final class Stocks {
     };
   }
 
-  private static TextColumn<Stock> newPriceColumn() {
+  static TextColumn<Stock> newPriceColumn() {
     return new TextColumn<Stock>() {
       @Override
       public String getValue(Stock stock) {
@@ -45,7 +43,7 @@ final class Stocks {
     };
   }
 
-  private static TextColumn<Stock> newVariationColumn() {
+  static TextColumn<Stock> newVariationColumn() {
     return new TextColumn<Stock>() {
       @Override
       public String getValue(Stock stock) {
@@ -56,22 +54,13 @@ final class Stocks {
     };
   }
 
-  private static TextColumn<Stock> newCompanyColumn() {
+  static TextColumn<Stock> newCompanyColumn() {
     return new TextColumn<Stock>() {
       @Override
       public String getValue(Stock stock) {
         return stock.getCompany();
       }
     };
-  }
-
-  static CellTable<Stock> newCellTable() {
-    CellTable<Stock> table = new CellTable<>();
-    table.addColumn(Stocks.newIdColumn(), "ID");
-    table.addColumn(Stocks.newCompanyColumn(), "Company");
-    table.addColumn(Stocks.newPriceColumn(), "Price");
-    table.addColumn(Stocks.newVariationColumn(), "Variation");
-    return table;
   }
 
 }

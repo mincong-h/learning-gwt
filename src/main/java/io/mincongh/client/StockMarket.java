@@ -1,5 +1,6 @@
 package io.mincongh.client;
 
+import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,16 +9,14 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.ListDataProvider;
-
 import io.mincongh.shared.FieldVerifier;
-
-import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -39,19 +38,15 @@ public class StockMarket implements EntryPoint {
 
   private final Messages messages = GWT.create(Messages.class);
 
-  private final List<Stock> stocks = Stocks.newRows(10);
-
   private final ListDataProvider<Stock> dataProvider = new ListDataProvider<>();
 
-  private final CellTable<Stock> prices = Stocks.newCellTable();
+  private final CellTable<Stock> stockTable = new CellTable<>();
 
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    dataProvider.addDataDisplay(prices);
-    dataProvider.setList(stocks);
-
+    initStockTable();
     final Button addButton = new Button(messages.addButton());
     final TextBox nameField = new TextBox();
     nameField.setText("11, Google, 1.0, 2");
@@ -61,7 +56,7 @@ public class StockMarket implements EntryPoint {
     addButton.addStyleName("sendButton");
 
     // Add widgets to the RootPanel
-    RootPanel.get("stockContainer").add(prices);
+    RootPanel.get("stockContainer").add(stockTable);
     RootPanel.get("nameFieldContainer").add(nameField);
     RootPanel.get("sendButtonContainer").add(addButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
@@ -134,9 +129,9 @@ public class StockMarket implements EntryPoint {
           public void onSuccess(String result) {
             responseLabel.removeStyleName("serverResponseLabelError");
             responseLabel.setText(result);
-            stocks.add(Stock.parse(result));
+            dataProvider.getList().add(Stock.parse(result));
             dataProvider.refresh();
-            prices.redraw();
+            stockTable.redraw();
             updateDate();
           }
         });
@@ -147,6 +142,29 @@ public class StockMarket implements EntryPoint {
     MyHandler handler = new MyHandler();
     addButton.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
+  }
+
+  private void initStockTable() {
+    Column<Stock, String> deleteColumn = new Column<Stock, String>(new ButtonCell()) {
+      @Override
+      public String getValue(Stock stock) {
+        return "x";
+      }
+    };
+    deleteColumn.setFieldUpdater((index, stock, value) -> {
+      dataProvider.getList().remove(stock);
+      dataProvider.refresh();
+      stockTable.redraw();
+    });
+
+    stockTable.addColumn(Stocks.newIdColumn(), "ID");
+    stockTable.addColumn(Stocks.newCompanyColumn(), "Company");
+    stockTable.addColumn(Stocks.newPriceColumn(), "Price");
+    stockTable.addColumn(Stocks.newVariationColumn(), "Variation");
+    stockTable.addColumn(deleteColumn, "Remove");
+
+    dataProvider.addDataDisplay(stockTable);
+    dataProvider.setList(Stocks.newRows(10));
   }
 
 }
