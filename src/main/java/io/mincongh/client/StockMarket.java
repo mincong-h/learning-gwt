@@ -42,6 +42,8 @@ public class StockMarket implements EntryPoint {
 
   private final CellTable<Stock> stockTable = new CellTable<>();
 
+  private final Hello hello = new Hello();
+
   /**
    * This is the entry point method.
    */
@@ -60,6 +62,7 @@ public class StockMarket implements EntryPoint {
     RootPanel.get("nameFieldContainer").add(nameField);
     RootPanel.get("sendButtonContainer").add(addButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
+    RootPanel.get("helloInput").add(hello);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);
