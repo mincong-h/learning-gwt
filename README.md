@@ -23,6 +23,22 @@ Then run the GWT application in DevMode via Maven:
 $ mvn gwt:run
 ```
 
+## GWT Browser Support
+
+Here's a list of GWT `user.agent` properties and the browsers they correspond
+to (inspired by [this post](https://stackoverflow.com/questions/16047427/)). The
+property are defined by [`UserAgent.gwt.xml`][UserAgent.gwt.xml]:
+
+```xml
+<!-- Browser-sensitive code should use the 'user.agent' property -->
+<define-property name="user.agent" values="ie8" />
+<extend-property name="user.agent" values="gecko1_8" />
+<extend-property name="user.agent" values="safari" />
+<extend-property name="user.agent" values="ie9" fallback-value="ie8" />
+<extend-property name="user.agent" values="ie10" />
+<property-provider name="user.agent" generator="com.google.gwt.useragent.rebind.UserAgentPropertyGenerator"/>
+```
+
 ## GWT Con 2016 Keynote
 
 See <https://www.youtube.com/watch?v=P4VhPck5s_g>
@@ -59,3 +75,4 @@ DOM | Document Object Model
 
 [travis]: https://travis-ci.org/mincong-h/learning-gwt
 [travis-img]: https://travis-ci.org/mincong-h/learning-gwt.svg?branch=master
+[UserAgent.gwt.xml]: https://github.com/gwtproject/gwt/blob/master/user/src/com/google/gwt/useragent/UserAgent.gwt.xml
