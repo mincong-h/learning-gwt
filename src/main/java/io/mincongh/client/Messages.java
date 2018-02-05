@@ -10,4 +10,8 @@ public interface Messages extends com.google.gwt.i18n.client.Messages {
 
   @DefaultMessage("Add")
   String addButton();
+
+  @DefaultMessage("Random Data")
+  String randomData();
+
 }
