@@ -21,12 +21,12 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.ListDataProvider;
 import io.mincongh.shared.FieldVerifier;
+import io.mincongh.shared.R;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class StockMarket implements EntryPoint {
       + "attempting to contact the server. Please check your network "
       + "connection and try again.";
 
-  private static final String JSON_URL = "http://127.0.0.1:8888/StockMarket/jsonServlet?q=ABC+DEF";
+  private static final String JSON_URL = "http://127.0.0.1:8888/" + R.JSON_URL;
 
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
