@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="StockMarketI18n">
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='io.mincongh.StockMarket' />
+  <!--
+    Override the locale settings.
+    Replace the default locale by french (fr).
+
+    See "GWT Dynamic Locale"
+    (https://stackoverflow.com/questions/16293796)
+   -->
+  <set-property name="locale" value="fr" />
+</module>

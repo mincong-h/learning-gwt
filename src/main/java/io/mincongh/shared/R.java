@@ -12,6 +12,8 @@ public final class R {
    */
   public static final String JUNIT_MODULE = "io.mincongh.StockMarketJUnit";
 
+  public static final String TEST_I18N_MODULE = "io.mincongh.StockMarketI18n";
+
   /**
    * Simple URL which returns HTTP response in JSON format.
    */
