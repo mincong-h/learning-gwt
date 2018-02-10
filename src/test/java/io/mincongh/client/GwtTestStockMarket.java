@@ -5,6 +5,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import io.mincongh.shared.FieldVerifier;
+import io.mincongh.shared.R;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase.
@@ -21,8 +22,9 @@ public class GwtTestStockMarket extends GWTTestCase {
   /**
    * Must refer to a valid module that sources this class.
    */
+  @Override
   public String getModuleName() {
-    return "io.mincongh.StockMarketJUnit";
+    return R.JUNIT_MODULE;
   }
 
   /**
@@ -55,11 +57,13 @@ public class GwtTestStockMarket extends GWTTestCase {
     // Send a request to the server.
     final String input = "GWT User";
     greetingService.addStock(input, new AsyncCallback<String>() {
+      @Override
       public void onFailure(Throwable caught) {
         // The request resulted in an unexpected error.
         fail("Request failure: " + caught.getMessage());
       }
 
+      @Override
       public void onSuccess(String result) {
         // Verify that the response is correct.
         assertEquals(input, result);
