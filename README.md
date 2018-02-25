@@ -1,6 +1,6 @@
-# learning-gwt
+# Learning GWT [![Build Status][travis-img]][travis]
 
-Learning GWT
+Learning GWT (Google Web Toolkit).
 
 ## GWT Tutorial
 
@@ -56,3 +56,6 @@ There're many interesting ideas out there. Let's take a look together:
 Abbreviation | Description
 :--- | :---
 DOM | Document Object Model
+
+[travis]: https://travis-ci.org/mincong-h/learning-gwt
+[travis-img]: https://travis-ci.org/mincong-h/learning-gwt.svg?branch=master
