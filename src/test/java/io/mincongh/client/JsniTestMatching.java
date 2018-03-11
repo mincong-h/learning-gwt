@@ -8,7 +8,7 @@ import io.mincongh.shared.R;
  *
  * @author Mincong Huang
  */
-public class GwtTestJsni extends GWTTestCase {
+public class JsniTestMatching extends GWTTestCase {
 
   @Override
   public String getModuleName() {
@@ -113,7 +113,7 @@ public class GwtTestJsni extends GWTTestCase {
    */
   private static native void exportMethod() /*-{
     $wnd.computeLoanInterest = $entry(
-        @io.mincongh.client.GwtTestJsni.MyUtility::computeLoanInterest(IFI));
+        @io.mincongh.client.JsniTestMatching.MyUtility::computeLoanInterest(IFI));
   }-*/;
 
   private static native int applyExportedMethod(int amount, float interestRate, int term) /*-{

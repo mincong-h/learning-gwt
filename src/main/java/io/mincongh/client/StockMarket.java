@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.ListDataProvider;
+import io.mincongh.client.interop.ImportedClass;
 import io.mincongh.shared.FieldVerifier;
 import io.mincongh.shared.R;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class StockMarket implements EntryPoint {
     final TextBox randomDataInput = new TextBox();
     randomDataInput.setText(JSON_URL);
     final Button randomDataButton = new Button(messages.randomData());
+    final Button jsInteropButton = new Button("Show ImportedClass");
 
     // We can add style names to widgets
     addButton.addStyleName("sendButton");
@@ -88,6 +90,7 @@ public class StockMarket implements EntryPoint {
     RootPanel.get("randomDataUrl").add(randomDataInput);
     RootPanel.get("randomDataButton").add(randomDataButton);
     RootPanel.get("randomDataResponse").add(randomStockTable);
+    RootPanel.get("jsInteropButton").add(jsInteropButton);
 
     randomDataButton.addClickHandler(event -> {
       String url = randomDataInput.getText();
@@ -118,6 +121,10 @@ public class StockMarket implements EntryPoint {
       } catch (RequestException e) {
         Window.alert("Could not retrieve JSON");
       }
+    });
+
+    jsInteropButton.addClickHandler(event -> {
+      Window.alert(new ImportedClass().getName());
     });
 
     // Focus the cursor on the name field when the app loads
