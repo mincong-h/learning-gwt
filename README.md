@@ -67,12 +67,53 @@ There're many interesting ideas out there. Let's take a look together:
   minimal, none. Depends on quality of the codebase, and the runtime execution
   requirements, you can choose different type-checks.
 
+## GWT Compiler
+
+The GWT compiler is defined in `$GWT_HOME/dev`.
+
+- **com.google.gwt.core.ext** external resources?
+- **com.google.gwt.core.linker** for linking resources.
+- **com.google.gwt.dev.cfg** defines mechanism for configurations, coming from
+  GWT files _"\*.gwt.xml"_, dynamic Oracle property etc.
+- **com.google.gwt.dev.javac** provides support for `javac`, Java programming
+  language compiler.
+- **com.google.gwt.dev.jdt** provides support for Eclipse Java development tools
+  (JDT compiler), which behaves differently from `javac` (not sure)
+- **com.google.gwt.dev.js** JavaScript package, including _ast_ for abstract
+  syntax tree, _globles_ for browser globles, and _rhino_ for source
+  imported from Mozilla's Rhino project.
+- **com.google.gwt.dev.jjs** Java-to-JavaScript (jjs) compiler. Its sub-package
+  _ast_ contains the Java classes for abstract syntax tree (ast) construction.
+  Its sub-package _impl_ contains the referenced implementation.
+- **com.google.gwt.dev.json** special JSON handling.
+- **com.google.gwt.dev.resource** TODO
+- **com.google.gwt.dev.shell** GWT shell
+- **com.google.gwt.dev.ui** different UI and events.
+- **com.google.gwt.dev.url** uniform resource loading, e.g. JAR.
+- **com.google.gwt.dev.util** utility classes.
+- **com.google.gwt.util** is a module contains utility classes. Its sub-package
+  _regexfilter_ is useful for defining regex filter for inclusion or exclusion.
+  Its sub-package _tools_ is useful for handle GWT command-line applications,
+  e.g. different kinds of argument handling.
+- **com.google.gwt.soyc** is the story of your compile (SOYC). To obtain a SOYC
+  report for your application, you need to add flag `-soyc` to the compilation
+  options, which will generates a XML result; then convert the result into
+  viewable HTML.
+
 ## Terminology
 
 Abbreviation | Description
 :--- | :---
 DOM | Document Object Model
 
+- **Deferred binding** is a feature of the GWT compiler that works by generating many versions of code at compile time, only one of which needs to be loaded by a particular client during bootstrapping at runtime. Each version is generated on a per browser basis, along with any other axis that your application defines or uses.
+
 [travis]: https://travis-ci.org/mincong-h/learning-gwt
 [travis-img]: https://travis-ci.org/mincong-h/learning-gwt.svg?branch=master
 [UserAgent.gwt.xml]: https://github.com/gwtproject/gwt/blob/master/user/src/com/google/gwt/useragent/UserAgent.gwt.xml
+
+## References
+
+- [How to use GWT 2.0 with Maven and Generate SOYC Reports][1]
+
+[1]: https://raibledesigns.com/rd/entry/how_to_use_gwt_2
